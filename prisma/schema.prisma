@@ -22,12 +22,6 @@ model Category {
   Product    Product[]
 }
 
-model ProductPhoto {
-  id      String    @id @default(uuid())
-  img_url String
-  Product Product[]
-}
-
 model Product {
   id String @id @default(uuid())
 
@@ -47,6 +41,5 @@ model Product {
   location   String   @default("Angola, Luanda")
   views      Int      @default(0)
 
-  product_photo  ProductPhoto @relation(fields: [productPhotoId], references: [id])
-  productPhotoId String
+  images_url String
 }
