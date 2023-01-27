@@ -13,12 +13,6 @@ export const zodProductTypes = z.object({
   location: z.string().default("Angola, Benguela"),
 })
 
-export const zodProductFilter = z.object({
-  categoryId: z.number(), 
-  state: z.string(), 
-  dateStart: z.date(), 
-  datEnd: z.date(),
-  location: z.string(), 
-  priceStart: z.number(), 
-  priceEnd: z.number()
+export const zodProductBody = z.object({
+  search: z.string()
 })

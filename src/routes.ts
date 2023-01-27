@@ -1,14 +1,8 @@
-import { Router, request, response } from "express";
+import { Router } from "express";
 import prisma from "./lib/prisma"
-import { zodProductTypes, zodProductFilter } from "./lib/zod";
+import { zodProductTypes, zodProductBody } from "./lib/zod";
 
 const router = Router()
-
-router.get('/category', async(request, response) => {
-  const categorys = await prisma.category.findMany()
-
-  response.json(categorys)
-})
 
 router.get('/products', async (request, response) => {
   const products = await prisma.product.findMany()
