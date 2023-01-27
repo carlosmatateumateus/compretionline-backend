@@ -5,14 +5,10 @@ export const zodProductTypes = z.object({
   title: z.string(),
   description: z.string(),
   price: z.number(),
-  categoryId: z.number(),
+  category: z.string(),
   state: z.string(),
   views: z.number().default(0),
   images_url: z.string(),
   most_view: z.boolean().default(false),
   location: z.string().default("Angola, Benguela"),
-})
-
-export const zodProductBody = z.object({
-  search: z.string()
 })
