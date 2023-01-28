@@ -3,7 +3,7 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -13,7 +13,7 @@ datasource db {
 
 model User {
   uid     String    @id @default(uuid())
-  email   String    @unique
+  email   String   
   Product Product[]
 }
 
@@ -36,4 +36,6 @@ model Product {
   views      Int      @default(0)
 
   images_url String
+
+  @@fulltext([title])
 }
