@@ -1,6 +1,6 @@
 import { Router } from "express";
 import prisma from "./lib/prisma"
-import { zodProductTypes, searchQueryTypes } from "./lib/zod";
+import { zodProductTypes, searchQueryTypes, zodProductEdited } from "./lib/zod";
 
 const router = Router()
 
@@ -40,7 +40,7 @@ router.get('/search/:title', async (request, response) => {
      category: {
         equals: category?.toLowerCase().trim()
      }, 
-     price 
+     price,
     }
   })
 
@@ -51,6 +51,21 @@ router.get('/product/:id', async(request, response) => {
   const product = await prisma.product.findUnique({
     where: {
       id: request.params.id
+    },
+    select: {
+      title: true,
+      description: true,
+      imagesUrl: true,
+      price: true,
+      category: true,
+      state: true,
+      location: true,
+      createdAt: true,
+      mostView: true,
+      views: true,
+      userUid: true, 
+      Question: true,
+      Answer: true
     }
   })
 
@@ -58,11 +73,31 @@ router.get('/product/:id', async(request, response) => {
 })
 
 router.post('/product/new', async(request, response) => {
+  const { 
+    title, state, price, description, 
+    category, imagesUrl, location, views, 
+    userUid
+  } = zodProductTypes.parse(request.body)
+
   const newProduct = await prisma.product.create({
-    data: zodProductTypes.parse(request.body)
+    data: {
+      title, state, price, description, 
+      category, imagesUrl, location, views, userUid
+    }
   })
 
   response.json(newProduct)
+})
+
+router.patch('/product/:id', async(request, response) => {
+  const editProduct = await prisma.product.update({
+    where: {
+      id: request.params.id
+    },
+    data: zodProductEdited.parse(request.body)
+  })
+
+  response.json(editProduct)
 })
 
 export default router;
