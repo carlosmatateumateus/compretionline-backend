@@ -4,6 +4,8 @@ import { zodProductTypes, searchQueryTypes, zodProductEdited } from "./lib/zod";
 
 const router = Router()
 
+// Product
+
 router.get('/products', async (request, response) => {
   const products = await prisma.product.findMany()
   response.json(products)
@@ -98,6 +100,20 @@ router.patch('/product/:id', async(request, response) => {
   })
 
   response.json(editProduct)
+})
+
+// User
+
+router.get('/products/:id',async (request, response) => {
+  const products = await prisma.product.findMany({
+    where: {
+      userUid: {
+        equals: request.params.id
+      }
+    }
+  })
+
+  response.json(products)
 })
 
 export default router;
