@@ -21,13 +21,13 @@ model User {
 model Answer {
   id String @id @default(uuid())
 
-  product    Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
   productId String
 
-  question Question @relation(fields: [questionId], references: [id])
+  question   Question @relation(fields: [questionId], references: [id])
   questionId String
 
-  title      String
+  title String
 }
 
 model Question {
@@ -54,16 +54,26 @@ model Product {
   price       Float
   category    String
 
-  state      String
+  state     String
   createdAt DateTime @default(now())
-  mostView  Boolean @default(false)
-  location   String
-  views      Int      @default(0)
+  mostView  Boolean  @default(false)
+  location  String
+  views     Int      @default(0)
 
-  imagesUrl String 
-
-  Question Question[]
-  Answer   Answer[]
+  Question     Question[]
+  Answer       Answer[]
+  ProductImage ProductImage[]
 
   @@fulltext([title])
+}
+
+model ProductImage {
+  id String @default(uuid())
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  photoUrl String @unique
+
+  @@unique([id, productId])
 }
