@@ -60,7 +60,7 @@ model Product {
   location   String
   views      Int      @default(0)
 
-  imagesUrl String
+  imagesUrl String 
 
   Question Question[]
   Answer   Answer[]

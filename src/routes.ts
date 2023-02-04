@@ -1,15 +1,19 @@
 import { Router } from "express";
 import prisma from "./lib/prisma"
-import { zodProductTypes, searchQueryTypes, zodProductEdited } from "./lib/zod";
+import { zodProductTypes, searchQueryTypes } from "./lib/zod";
+import { multerConfig } from "./lib/multer";
+import { uploadImage } from "./controllers/uploadImage";
+import multer from "multer";
 
 const router = Router()
 
-// Product
-
+// Get all products
 router.get('/products', async (request, response) => {
   const products = await prisma.product.findMany()
   response.json(products)
 })
+
+// Search products
 
 router.get('/search/:title', async (request, response) => {
   const { category, location, state, priceMoreThan, priceLessThan } = searchQueryTypes.parse(request.query)
@@ -49,6 +53,39 @@ router.get('/search/:title', async (request, response) => {
   response.json(productFiltered)
 })
 
+// Crea
+
+router.post('/product', multer(multerConfig).array('images', 5), async (request, response) => {
+  const images = [] as Array<String>
+
+  for (let img of request.files as any) {
+    await uploadImage(img)
+    .then((url:any) => {
+      images.push(url)
+    })
+    .catch(e => {
+      console.log(e)
+    })
+  }
+  
+  const imagesUrl = JSON.stringify(images)
+
+  const { 
+    title, state, price, description, 
+    category, location, views, 
+    userUid
+  } = zodProductTypes.parse(request.body)
+
+  const product = await prisma.product.create({
+    data: {
+      title, state, price:Number(price), description, 
+      category, imagesUrl, location, views: Number(views), userUid
+    }
+  })
+
+  response.json(product)
+})
+
 router.get('/product/:id', async(request, response) => {
   const product = await prisma.product.findUnique({
     where: {
@@ -74,46 +111,49 @@ router.get('/product/:id', async(request, response) => {
   response.json(product)
 })
 
-router.post('/product/new', async(request, response) => {
+router.patch('/product/:id', multer(multerConfig).array('images', 5), async (request, response) => {
+  const productId = request.params.id
+  const images = [] as Array<String>
+
+  for (let img of request.files as any) {
+    await uploadImage(img)
+    .then((url:any) => {
+      images.push(url)
+    })
+    .catch(e => {
+      console.log(e)
+    })
+  }
+  
+  const imagesUrl = JSON.stringify(images)
+
   const { 
     title, state, price, description, 
-    category, imagesUrl, location, views, 
+    category, location, views, 
     userUid
   } = zodProductTypes.parse(request.body)
 
-  const newProduct = await prisma.product.create({
+  const product = await prisma.product.update({
+    where: {
+      id: productId
+    },
     data: {
-      title, state, price, description, 
-      category, imagesUrl, location, views, userUid
+      title, state, price:Number(price), description, 
+      category, imagesUrl, location, views: Number(views), userUid
     }
   })
 
-  response.json(newProduct)
+  response.json(product)
 })
 
-router.patch('/product/:id', async(request, response) => {
-  const editProduct = await prisma.product.update({
+router.delete('/product/:id', async(request, response) => {
+  const product = await prisma.product.delete({
     where: {
       id: request.params.id
-    },
-    data: zodProductEdited.parse(request.body)
-  })
-
-  response.json(editProduct)
-})
-
-// User
-
-router.get('/products/:id',async (request, response) => {
-  const products = await prisma.product.findMany({
-    where: {
-      userUid: {
-        equals: request.params.id
-      }
     }
   })
 
-  response.json(products)
+  response.json(product)
 })
 
 export default router;
