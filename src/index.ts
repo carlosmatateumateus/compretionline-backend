@@ -10,6 +10,6 @@ app.use(router)
 
 dotenv.config()
 
-app.listen(8080, () => {
+app.listen(5500, () => {
   console.log('Server is running! 🚀')
 })

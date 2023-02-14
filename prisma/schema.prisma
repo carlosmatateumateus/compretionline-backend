@@ -12,10 +12,15 @@ datasource db {
 }
 
 model User {
-  uid      String     @id @default(uuid())
-  email    String
+  id String @id @default(uuid())
+
+  email String @unique
+
   Product  Product[]
   Question Question[]
+  Favorite Favorite[]
+
+  @@map("users")
 }
 
 model Answer {
@@ -28,6 +33,8 @@ model Answer {
   questionId String
 
   title String
+
+  @@map("answers")
 }
 
 model Question {
@@ -35,45 +42,59 @@ model Question {
 
   title String
 
-  owner   User   @relation(fields: [userUid], references: [uid])
-  userUid String
+  owner  User   @relation(fields: [userId], references: [id])
+  userId String
 
   product   Product  @relation(fields: [productId], references: [id])
   productId String
   Answer    Answer[]
+
+  @@map("questions")
 }
 
 model Product {
   id String @id @default(uuid())
 
-  owner   User   @relation(fields: [userUid], references: [uid])
-  userUid String
+  owner  User   @relation(fields: [userId], references: [id])
+  userId String
 
   title       String
+  category    String
   description String
   price       Float
-  category    String
+  location    String
 
-  state     String
   createdAt DateTime @default(now())
-  mostView  Boolean  @default(false)
-  location  String
-  views     Int      @default(0)
+  views     Int
 
   Question     Question[]
   Answer       Answer[]
   ProductImage ProductImage[]
+  Favorite     Favorite[]
 
   @@fulltext([title])
+  @@map("products")
 }
 
 model ProductImage {
-  id String @default(uuid())
+  id String @id @default(uuid())
 
   product   Product @relation(fields: [productId], references: [id])
   productId String
 
   photoUrl String @unique
 
-  @@unique([id, productId])
+  @@map("images")
+}
+
+model Favorite {
+  id String @id @default(uuid())
+
+  owner  User   @relation(fields: [userId], references: [id])
+  userId String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  @@map("favorites")
 }

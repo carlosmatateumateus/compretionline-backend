@@ -1,16 +1,14 @@
 import { bucket,BUCKET } from "../lib/firebase"
 
-export const uploadImage = (files: any) => {
+export const uploadImage = (image: any) => {
   return new Promise((resolve, reject) => {
-    const img = files
-
-    const imgName = Date.now()  + '.' + img?.originalname.split('.').pop()
+    const imgName = Date.now()  + '.' + image?.originalname.split('.').pop()
 
     const file = bucket.file(imgName)
 
     const stream = file.createWriteStream({
       metadata: {
-        contentType: img?.mimetype
+        contentType: image?.mimetype
       }
     })
 
@@ -25,6 +23,6 @@ export const uploadImage = (files: any) => {
     })
 
 
-    stream.end(img?.buffer)
+    stream.end(image?.buffer)
     })
 }
