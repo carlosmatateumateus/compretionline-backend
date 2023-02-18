@@ -1,5 +1,5 @@
 {
-  "name": "compretionline-api",
+  "name": "compretionline-backend",
   "version": "1.0.0",
   "description": "An Api to use in compretionline project",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/carlosmatateumateus/compretionline-api.git"
+    "url": "git+https://github.com/carlosmatateumateus/compretionline-backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/carlosmatateumateus/compretionline-api/issues"
+    "url": "https://github.com/carlosmatateumateus/compretionline-backend/issues"
   },
-  "homepage": "https://github.com/carlosmatateumateus/compretionline-api#readme",
+  "homepage": "https://github.com/carlosmatateumateus/compretionline-backend#readme",
   "dependencies": {
     "@prisma/client": "^4.9.0",
     "axios": "^1.3.3",
