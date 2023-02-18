@@ -1,15 +1,27 @@
 import express from "express"
-import router from "./routes"
 import dotenv from "dotenv"
+import cors from "cors"
+
+// Routes
+
+import productRoutes from "./routes/productRoutes"
+import userRoutes from "./routes/userRoutes"
 
 const app = express()
 
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
-app.use(router)
-
 dotenv.config()
 
-app.listen(5500, () => {
+app.use(cors())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
+// Use routes
+
+app.use(productRoutes)
+app.use(userRoutes)
+
+
+
+app.listen(8080, () => {
   console.log('Server is running! 🚀')
 })
