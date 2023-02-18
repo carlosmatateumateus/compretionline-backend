@@ -36,11 +36,11 @@ router.get('/user/email/:productId', async (request, response) => {
   const user = await prisma.product.findFirst({
     where: { id: request.params.productId },
     select: {
-      owner: true
+      user: true
     }
   })
 
-  response.json(user?.owner)
+  response.json(user?.user)
 })
 
 export default router

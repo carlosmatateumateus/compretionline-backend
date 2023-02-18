@@ -4,8 +4,7 @@
   "description": "An Api to use in compretionline project",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev ./src/index.ts",
-    "vercel-build": "npx prisma generate && npx prisma migrate deploy && next build"
+    "dev": "ts-node-dev ./src/index.ts"
   },
   "repository": {
     "type": "git",
