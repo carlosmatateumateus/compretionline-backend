@@ -6,7 +6,6 @@ generator client {
 datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
-  relationMode = "prisma"
 }
 
 model User {
@@ -29,9 +28,8 @@ model Product {
   price       Float    @db.Float()
   location    String   @db.VarChar(150)
   photo       String   @db.VarChar(255)
-  createdAt   DateTime
+  createdAt   DateTime 
 
   @@fulltext([title])
   @@map("products")
-  @@index([userId])
 }

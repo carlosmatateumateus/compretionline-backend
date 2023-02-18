@@ -9,6 +9,8 @@ import userRoutes from "./routes/userRoutes"
 
 const app = express()
 
+const port = process.env.PORT
+
 dotenv.config()
 
 app.use(cors())
@@ -26,6 +28,6 @@ app.use(userRoutes)
 
 
 
-app.listen(8080, () => {
+app.listen(port, () => {
   console.log('Server is running! 🚀')
 })
