@@ -13,19 +13,19 @@ router.post('/product', async (request, response) => {
     userId: z.string(),
     title: z.string()
     .min(10, { message: "Must be 5 or more characters long" })
-    .max(30, { message: "Must be 5 or fewer characters long" }),
+    .max(20, { message: "Must be 20 or fewer characters long" }),
 
     description: z.string()
-    .min(30, { message: "Must be 5 or more characters long" })
-    .max(350, { message: "Must be 5 or more characters long" }),
+    .min(30, { message: "Must be 30 or more characters long" })
+    .max(350, { message: "Must be 350 or more characters long" }),
 
     price: z.number()
-    .gte(0.1)
-    .lte(1000000000),
+    .gte(1)
+    .lte(1000000000000),
 
     location: z.string()
     .min(5, { message: "Must be 5 or more characters long" })
-    .max(15, { message: "Must be 5 or more characters long" }),
+    .max(30, { message: "Must be 30 or more characters long" }),
 
     photo: z.string()
     .startsWith("https://", { message: "Must provide secure URL" })
