@@ -9,16 +9,30 @@ router.post('/product', async (request, response) => {
   let product = {};
   let httpStatus = 201;
 
-  const product_types = z.object({
+  const productType = z.object({
     userId: z.string(),
-    title: z.string(),
-    description: z.string(),
-    price: z.number(),
-    location: z.string(),
-    photo: z.string(),
+    title: z.string()
+    .min(10, { message: "Must be 5 or more characters long" })
+    .max(30, { message: "Must be 5 or fewer characters long" }),
+
+    description: z.string()
+    .min(30, { message: "Must be 5 or more characters long" })
+    .max(350, { message: "Must be 5 or more characters long" }),
+
+    price: z.number()
+    .gte(0.1)
+    .lte(1000000000),
+
+    location: z.string()
+    .min(5, { message: "Must be 5 or more characters long" })
+    .max(15, { message: "Must be 5 or more characters long" }),
+
+    photo: z.string()
+    .startsWith("https://", { message: "Must provide secure URL" })
+    .endsWith(".com", { message: "Only .com domains allowed" }),
   })
 
-  const { userId, title, description, price, location, photo } = product_types.parse(request.body)
+  const { userId, title, description, price, location, photo } = productType.parse(request.body)
   console.log(userId, title, description, price, location, photo)
   
   await getDate()
@@ -47,11 +61,25 @@ router.post('/product', async (request, response) => {
 
 router.patch('/product/:id', async (request, response) => {
   const productType = z.object({
-    title: z.string(),
-    description: z.string(),
-    price: z.number(),
-    location: z.string().default("Angola, Benguela"),
+    title: z.string()
+    .min(10, { message: "Must be 5 or more characters long" })
+    .max(30, { message: "Must be 5 or fewer characters long" }),
+
+    description: z.string()
+    .min(30, { message: "Must be 5 or more characters long" })
+    .max(350, { message: "Must be 5 or more characters long" }),
+
+    price: z.number()
+    .gte(0.1)
+    .lte(1000000000),
+
+    location: z.string()
+    .min(5, { message: "Must be 5 or more characters long" })
+    .max(15, { message: "Must be 5 or more characters long" }),
+
     photo: z.string()
+    .startsWith("https://", { message: "Must provide secure URL" })
+    .endsWith(".com", { message: "Only .com domains allowed" }),
   })
 
   const { title, description, price, location, photo } = productType.parse(request.body)
