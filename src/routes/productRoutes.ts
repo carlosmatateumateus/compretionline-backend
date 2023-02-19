@@ -7,6 +7,7 @@ const router = Router()
 
 router.post('/product', async (request, response) => {
   let product = {};
+  let httpStatus = 201;
 
   const product_types = z.object({
     userId: z.string(),
@@ -33,9 +34,15 @@ router.post('/product', async (request, response) => {
         createdAt
       }
     })
+
+    httpStatus = 201
+  })
+  .catch((e) => {
+    product = e
+    httpStatus = 501
   })
 
-  response.status(201).json(product)
+  response.status(httpStatus).json(product)
 })
 
 router.patch('/product/:id', async (request, response) => {

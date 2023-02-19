@@ -7,5 +7,8 @@ export default function getDate() {
       console.table(response.data)
       resolve(response.data.datetime)
     })
+    .catch((error) => {
+      reject(error)
+    })
   })
 } 
