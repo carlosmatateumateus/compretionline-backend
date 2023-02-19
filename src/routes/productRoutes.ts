@@ -29,11 +29,9 @@ router.post('/product', async (request, response) => {
 
     photo: z.string()
     .startsWith("https://", { message: "Must provide secure URL" })
-    .endsWith(".com", { message: "Only .com domains allowed" }),
   })
 
   const { userId, title, description, price, location, photo } = productType.parse(request.body)
-  console.log(userId, title, description, price, location, photo)
   
   await getDate()
   .then(async (createdAt:any) => {
@@ -79,7 +77,6 @@ router.patch('/product/:id', async (request, response) => {
 
     photo: z.string()
     .startsWith("https://", { message: "Must provide secure URL" })
-    .endsWith(".com", { message: "Only .com domains allowed" }),
   })
 
   const { title, description, price, location, photo } = productType.parse(request.body)
