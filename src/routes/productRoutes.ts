@@ -73,7 +73,7 @@ router.patch('/product/:id', async (request, response) => {
 
     location: z.string()
     .min(5, { message: "Must be 5 or more characters long" })
-    .max(15, { message: "Must be 5 or more characters long" }),
+    .max(30, { message: "Must be 30 or more characters long" }),
 
     photo: z.string()
     .startsWith("https://", { message: "Must provide secure URL" })
