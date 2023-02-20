@@ -27,11 +27,15 @@ router.post('/product', async (request, response) => {
     .min(5, { message: "Must be 5 or more characters long" })
     .max(30, { message: "Must be 30 or more characters long" }),
 
+    category: z.string()
+    .min(5, { message: "Must be 5 or more characters long" })
+    .max(30, { message: "Must be 30 or more characters long" }),
+
     photo: z.string()
     .startsWith("https://", { message: "Must provide secure URL" })
   })
 
-  const { userId, title, description, price, location, photo } = productType.parse(request.body)
+  const { userId, title, description, price, location, category, photo } = productType.parse(request.body)
   
   await getDate()
   .then(async (createdAt:any) => {
@@ -40,8 +44,9 @@ router.post('/product', async (request, response) => {
         userId,
         title,
         description,
-        price,
+        price: Number((price).toFixed(2)),
         location,
+        category,
         photo,
         createdAt
       }
@@ -75,15 +80,19 @@ router.patch('/product/:id', async (request, response) => {
     .min(5, { message: "Must be 5 or more characters long" })
     .max(30, { message: "Must be 30 or more characters long" }),
 
+    category: z.string()
+    .min(5, { message: "Must be 5 or more characters long" })
+    .max(30, { message: "Must be 30 or more characters long" }),
+
     photo: z.string()
     .startsWith("https://", { message: "Must provide secure URL" })
   })
 
-  const { title, description, price, location, photo } = productType.parse(request.body)
+  const { title, description, price, location, photo, category } = productType.parse(request.body)
 
   const product = await prisma.product.update({
     where: { id: request.params.id },
-    data: { title, description, price, location, photo }
+    data: { title, description, price, location, photo, category }
   })
 
   response.json(product)
@@ -99,6 +108,7 @@ router.get('/product/:id', async(request, response) => {
       description: true,
       price: true,
       location: true,
+      category: true,
       createdAt: true,
       userId: true, 
       photo: true,
@@ -122,7 +132,7 @@ router.get('/product/search/:title/', async (request, response) => {
   const products = await prisma.product.findMany({
     where: {
       title: {
-        search: request.params.title
+        contains: request.params.title
       },
     },
   })
@@ -130,8 +140,24 @@ router.get('/product/search/:title/', async (request, response) => {
   const productsCount = await prisma.product.count({
     where: {
       title: {
-        search: request.params.title
+        contains: request.params.title
       },
+    },
+  })
+
+  response.json({ products, results: productsCount})
+})
+
+router.get('/product/category/:title', async(request, response) => {
+  const products = await prisma.product.findMany({
+    where: {
+      category: request.params.title
+    }
+  })
+
+  const productsCount = await prisma.product.count({
+    where: {
+      category: request.params.title,
     },
   })
 

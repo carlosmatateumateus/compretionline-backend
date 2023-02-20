@@ -4,8 +4,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -20,16 +20,16 @@ model User {
 model Product {
   id String @id @default(uuid())
 
-  user  User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
   userId String
 
   title       String   @db.VarChar(255)
-  description String   @db.MediumText()
   price       Float    @db.Float()
   location    String   @db.VarChar(150)
+  category    String   @db.VarChar(100)
+  description String   @db.MediumText()
   photo       String   @db.VarChar(255)
-  createdAt   DateTime 
-
-  @@fulltext([title])
+  createdAt   DateTime
+  
   @@map("products")
 }

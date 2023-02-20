@@ -12,8 +12,6 @@ router.post('/user', async (request, response) => {
 
   const { id, email } = userType.parse(request.body)
 
-  console.log(id, email)
-
   let user = await prisma.user.findFirst({
     where: { id }
   })

@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts"
   },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/carlosmatateumateus/compretionline-backend.git"
