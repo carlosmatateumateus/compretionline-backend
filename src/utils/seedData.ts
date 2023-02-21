@@ -44,7 +44,7 @@ export const computers = [
   },
   {
     "title": "Microsoft Surface Laptop",
-    "photo": "https://firebasestorage.googleapis.com/v0/b/compretionline.appspot.com/o/seed%2Fsurface-8mXecZtFYao-unsplash_10.jpg?alt=media&token=8140813a-3032-4882-96d0-4a3a50b6b04c",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/compretionline.appspot.com/o/seed%2Fonur-binay-60x59t9fA-o-unsplash_15.jpg?alt=media&token=e81d8561-6a16-4add-9f02-1312f47b6bf8",
   },
   {
     "title": "HP Pavilion 15-DK1056WM",
@@ -63,7 +63,7 @@ export const computers = [
     "photo": "https://firebasestorage.googleapis.com/v0/b/compretionline.appspot.com/o/seed%2Fjavier-esteban-mIUJZi8a828-unsplash_20.jpg?alt=media&token=f0b70a85-b9ca-4129-b645-5e6215d94e67"
   },
   {
-    "title": "Microsoft Surface Laptop",
+    "title": "Asus Zenbook Pro Duo UX581GV",
     "photo": "https://firebasestorage.googleapis.com/v0/b/compretionline.appspot.com/o/seed%2Fsurface-8mXecZtFYao-unsplash_10.jpg?alt=media&token=8140813a-3032-4882-96d0-4a3a50b6b04c",
   },
   {
@@ -72,7 +72,7 @@ export const computers = [
   },
   {
     "title": "Samsung SSD",
-    "photo": "https://www.simpleimageresizer.com/_uploads/photos/4d0466a6/erik-werlin-ZhFoeRUDXhI-unsplash_20.jpg"
+    "photo": "https://firebasestorage.googleapis.com/v0/b/compretionline.appspot.com/o/seed%2Ferik-werlin-ZhFoeRUDXhI-unsplash_20.jpg?alt=media&token=af6160f3-9403-45d9-b552-f7464e687486"
   },
 ]
 

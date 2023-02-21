@@ -40,7 +40,7 @@ async function main() {
       data: {
         userId: user.id,
         title: smarphone.title,
-        price: Number((Math.floor(Math.random() * 200).toFixed(2))),
+        price: parseFloat((Math.random() * 2000.44).toFixed(2)),
         location: locations[Math.floor(Math.random() * locations.length)],
         category: "smartphones",
         description,
@@ -55,7 +55,7 @@ async function main() {
       data: {
         userId: user.id,
         title: computer.title,
-        price: Number((Math.floor(Math.random() * 200).toFixed(2))),
+        price: parseFloat((Math.random() * 2000.44).toFixed(2)),
         location: locations[Math.floor(Math.random() * locations.length)],
         category: "computadores",
         description,
@@ -70,7 +70,7 @@ async function main() {
       data: {
         userId: user.id,
         title: musical.title,
-        price: Number((Math.floor(Math.random() * 200).toFixed(2))),
+        price: parseFloat((Math.random() * 2000.44).toFixed(2)),
         location: locations[Math.floor(Math.random() * locations.length)],
         category: "musical",
         description,
