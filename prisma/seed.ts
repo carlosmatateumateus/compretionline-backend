@@ -39,7 +39,7 @@ async function main() {
     await prisma.product.create({
       data: {
         userId: user.id,
-        title: smarphone.title,
+        title: smarphone.title.toLocaleLowerCase(),
         price: parseFloat((Math.random() * 2000.44).toFixed(2)),
         location: locations[Math.floor(Math.random() * locations.length)],
         category: "smartphones",
@@ -54,7 +54,7 @@ async function main() {
     await prisma.product.create({
       data: {
         userId: user.id,
-        title: computer.title,
+        title: computer.title.toLocaleLowerCase(),
         price: parseFloat((Math.random() * 2000.44).toFixed(2)),
         location: locations[Math.floor(Math.random() * locations.length)],
         category: "computadores",
@@ -69,7 +69,7 @@ async function main() {
     await prisma.product.create({
       data: {
         userId: user.id,
-        title: musical.title,
+        title: musical.title.toLocaleLowerCase(),
         price: parseFloat((Math.random() * 2000.44).toFixed(2)),
         location: locations[Math.floor(Math.random() * locations.length)],
         category: "musical",

@@ -128,22 +128,44 @@ router.delete('/product/:id', async(request, response) => {
   response.json({ msg: "The product Was deleted" })
 })
 
-router.get('/product/search/:title/', async (request, response) => {
-  const products = await prisma.product.findMany({
-    where: {
-      title: {
-        contains: request.params.title
-      },
-    },
-  })
+router.get('/product/search/:title/:category?', async (request, response) => {
+  let products, productsCount;
 
-  const productsCount = await prisma.product.count({
-    where: {
-      title: {
-        contains: request.params.title
+  if (request.params.category) {
+    products = await prisma.product.findMany({
+      where: {
+        title: {
+          search: request.params.title
+        },
+        category: request.params.category
+      }
+    })
+
+    productsCount = await prisma.product.count({
+      where: {
+        title: {
+          search: request.params.title
+        },
+        category: request.params.category
       },
-    },
-  })
+    })
+  } else {
+    products = await prisma.product.findMany({
+      where: {
+        title: {
+          search: request.params.title
+        }
+      }
+    }) 
+
+    productsCount = await prisma.product.count({
+      where: {
+        title: {
+          search: request.params.title
+        },
+      },
+    })
+  }
 
   response.json({ products, results: productsCount})
 })
@@ -174,7 +196,7 @@ router.get('/product/my/:id', async (request, response) => {
   const productsCount = await prisma.product.count({
     where: {
       userId: {
-        contains: request.params.id
+        search: request.params.id
       },
     },
   })
