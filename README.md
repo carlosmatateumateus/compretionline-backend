@@ -44,47 +44,67 @@ abrir o terminal e rodar os seguintes comandos na pasta do projecto:
 ## Fazer requisições
 
 <div style="overflow-x:auto;">
-  <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
-    <tr>
-      <th style="border: 1px solid black;text-align:center;">O que faz</th>
-      <th style="border: 1px solid black;text-align:center;">Caminho da rota</th>
-      <th style="border: 1px solid black;text-align:center;">Parâmetros</th>
-    </tr>
-    <tr>
-      <td style="border: 1px solid black;">Criar um novo produto</td>
-      <td style="border: 1px solid black;">/product</td>
-      <td style="border: 1px solid black;">-</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid black;">Atualizar um produto existente</td>
-      <td style="border: 1px solid black;">/product/:id</td>
-      <td style="border: 1px solid black;">id</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid black;">Recuperar um produto existente</td>
-      <td style="border: 1px solid black;">/product/:id</td>
-      <td style="border: 1px solid black;">id</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid black;">Remover um produto existente</td>
-      <td style="border: 1px solid black;">/product/:id</td>
-      <td style="border: 1px solid black;">id</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid black;">Buscar produtos por título e categoria</td>
-      <td style="border: 1px solid black;">/product/search/:title/:category?</td>
-      <td style="border: 1px solid black;">title, category (opcional)</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid black;">Buscar produtos por categoria</td>
-      <td style="border: 1px solid black;">/product/category/:title</td>
-      <td style="border: 1px solid black;">title</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid black;">Recuperar produtos de um usuário</td>
-      <td style="border: 1px solid black;">/product/my/:id</td>
-      <td style="border: 1px solid black;">id</td>
-    </tr>
+  <table style="border: 1px solid black;border-collapse: collapse;">
+    <thead style="background-color: #000; color: #fff;">
+      <tr>
+        <th style="border: 1px solid black;">HTTP</th>
+        <th style="border: 1px solid black;">Acção</th>
+        <th style="border: 1px solid black;">Rota</th>
+        <th style="border: 1px solid black;">Parâmetro</th>
+        <th style="border: 1px solid black;">Req body</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid black;">POST</td>
+        <td style="border: 1px solid black;">Cria produto</td>
+        <td style="border: 1px solid black;">/product</td>
+        <td style="border: 1px solid black;">Nenhum</td>
+        <td style="border: 1px solid black;">userId, title, description, price, location, category, photo</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">PATCH</td>
+        <td style="border: 1px solid black;">Atualiza produto</td>
+        <td style="border: 1px solid black;">/product/:id</td>
+        <td style="border: 1px solid black;">Id</td>
+        <td style="border: 1px solid black;">title, description, price, location, photo, category</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">GET</td>
+        <td style="border: 1px solid black;">Retorna produto</td>
+        <td style="border: 1px solid black;">/product/:id</td>
+        <td style="border: 1px solid black;">Id</td>
+        <td style="border: 1px solid black;">Nenhum</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">DELETE</td>
+        <td style="border: 1px solid black;">Deleta produto</td>
+        <td style="border: 1px solid black;">/product/:id</td>
+        <td style="border: 1px solid black;">Id</td>
+        <td style="border: 1px solid black;">Nenhum</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">GET</td>
+        <td style="border: 1px solid black;">Pesquisa produtos</td>
+        <td style="border: 1px solid black;">/product/search/:title/:category?</td>
+        <td style="border: 1px solid black;">title, category (opcional)</td>
+        <td style="border: 1px solid black;">Nenhum</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">GET</td>
+        <td style="border: 1px solid black;">Retorna por categoria</td>
+        <td style="border: 1px solid black;">/product/category/:title</td>
+        <td style="border: 1px solid black;">title</td>
+        <td style="border: 1px solid black;">Nenhum</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;">GET</td>
+        <td style="border: 1px solid black;">Retorna produtos de usuário</td>
+        <td style="border: 1px solid black;">/product/my/:id</td>
+        <td style="border: 1px solid black;">Id</td>
+        <td style="border: 1px solid black;">Nenhum</td>
+      </tr>
+    </tbody>
   </table>
 </div>
 
