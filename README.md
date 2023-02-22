@@ -43,48 +43,50 @@ abrir o terminal e rodar os seguintes comandos na pasta do projecto:
 
 ## Fazer requisições
 
-<table style="width:100%;border: 1px solid black;border-collapse: collapse;">
-  <tr>
-    <th style="border: 1px solid black;text-align:center;">O que faz</th>
-    <th style="border: 1px solid black;text-align:center;">Caminho da rota</th>
-    <th style="border: 1px solid black;text-align:center;">Parâmetros</th>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black;">Criar um novo produto</td>
-    <td style="border: 1px solid black;">/product</td>
-    <td style="border: 1px solid black;">-</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black;">Atualizar um produto existente</td>
-    <td style="border: 1px solid black;">/product/:id</td>
-    <td style="border: 1px solid black;">id</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black;">Recuperar um produto existente</td>
-    <td style="border: 1px solid black;">/product/:id</td>
-    <td style="border: 1px solid black;">id</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black;">Remover um produto existente</td>
-    <td style="border: 1px solid black;">/product/:id</td>
-    <td style="border: 1px solid black;">id</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black;">Buscar produtos por título e categoria</td>
-    <td style="border: 1px solid black;">/product/search/:title/:category?</td>
-    <td style="border: 1px solid black;">title, category (opcional)</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black;">Buscar produtos por categoria</td>
-    <td style="border: 1px solid black;">/product/category/:title</td>
-    <td style="border: 1px solid black;">title</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid black;">Recuperar produtos de um usuário</td>
-    <td style="border: 1px solid black;">/product/my/:id</td>
-    <td style="border: 1px solid black;">id</td>
-  </tr>
-</table>
+<div style="overflow-x:auto;">
+  <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+    <tr>
+      <th style="border: 1px solid black;text-align:center;">O que faz</th>
+      <th style="border: 1px solid black;text-align:center;">Caminho da rota</th>
+      <th style="border: 1px solid black;text-align:center;">Parâmetros</th>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black;">Criar um novo produto</td>
+      <td style="border: 1px solid black;">/product</td>
+      <td style="border: 1px solid black;">-</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black;">Atualizar um produto existente</td>
+      <td style="border: 1px solid black;">/product/:id</td>
+      <td style="border: 1px solid black;">id</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black;">Recuperar um produto existente</td>
+      <td style="border: 1px solid black;">/product/:id</td>
+      <td style="border: 1px solid black;">id</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black;">Remover um produto existente</td>
+      <td style="border: 1px solid black;">/product/:id</td>
+      <td style="border: 1px solid black;">id</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black;">Buscar produtos por título e categoria</td>
+      <td style="border: 1px solid black;">/product/search/:title/:category?</td>
+      <td style="border: 1px solid black;">title, category (opcional)</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black;">Buscar produtos por categoria</td>
+      <td style="border: 1px solid black;">/product/category/:title</td>
+      <td style="border: 1px solid black;">title</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black;">Recuperar produtos de um usuário</td>
+      <td style="border: 1px solid black;">/product/my/:id</td>
+      <td style="border: 1px solid black;">id</td>
+    </tr>
+  </table>
+</div>
 
 ## Contribuir
 
