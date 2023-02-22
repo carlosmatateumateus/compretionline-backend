@@ -5,13 +5,9 @@ import getDate from "../utils/getDate";
 
 const router = Router()
 
-router.post('/product', async (request, response) => {
-  let product = {};
-  let httpStatus = 201;
-
-  const productType = z.object({
-    userId: z.string(),
-    title: z.string()
+const productSchema = {
+  userId: z.string(),
+  title: z.string()
     .min(10, { message: "Must be 5 or more characters long" })
     .max(20, { message: "Must be 20 or fewer characters long" }),
 
@@ -33,6 +29,20 @@ router.post('/product', async (request, response) => {
 
     photo: z.string()
     .startsWith("https://", { message: "Must provide secure URL" })
+}
+
+router.post('/product', async (request, response) => {
+  let product = {};
+  let httpStatus = 201;
+
+  const productType = z.object({
+    userId: productSchema.userId,
+    title: productSchema.title,
+    description: productSchema.description,
+    price: productSchema.price,
+    location: productSchema.location,
+    category: productSchema.category,
+    photo: productSchema.photo
   })
 
   const { userId, title, description, price, location, category, photo } = productType.parse(request.body)
@@ -56,7 +66,7 @@ router.post('/product', async (request, response) => {
   })
   .catch((e) => {
     product = e
-    httpStatus = 501
+    httpStatus = 500
   })
 
   response.status(httpStatus).json(product)
@@ -64,28 +74,12 @@ router.post('/product', async (request, response) => {
 
 router.patch('/product/:id', async (request, response) => {
   const productType = z.object({
-    title: z.string()
-    .min(10, { message: "Must be 5 or more characters long" })
-    .max(30, { message: "Must be 5 or fewer characters long" }),
-
-    description: z.string()
-    .min(30, { message: "Must be 5 or more characters long" })
-    .max(350, { message: "Must be 5 or more characters long" }),
-
-    price: z.number()
-    .gte(0.1)
-    .lte(1000000000),
-
-    location: z.string()
-    .min(5, { message: "Must be 5 or more characters long" })
-    .max(30, { message: "Must be 30 or more characters long" }),
-
-    category: z.string()
-    .min(5, { message: "Must be 5 or more characters long" })
-    .max(30, { message: "Must be 30 or more characters long" }),
-
-    photo: z.string()
-    .startsWith("https://", { message: "Must provide secure URL" })
+    title: productSchema.title,
+    description: productSchema.description,
+    price: productSchema.price,
+    location: productSchema.location,
+    category: productSchema.category,
+    photo: productSchema.photo
   })
 
   const { title, description, price, location, photo, category } = productType.parse(request.body)
@@ -95,37 +89,46 @@ router.patch('/product/:id', async (request, response) => {
     data: { title, description, price, location, photo, category }
   })
 
-  response.json(product)
+  response.status(204).json(product)
 })
 
 router.get('/product/:id', async(request, response) => {
-  const product = await prisma.product.findUnique({
-    where: {
-      id: request.params.id
-    },
-    select: {
-      title: true,
-      description: true,
-      price: true,
-      location: true,
-      category: true,
-      createdAt: true,
-      userId: true, 
-      photo: true,
-    }
-  })
-
-  response.json(product)
+  try {
+    const product = await prisma.product.findUnique({
+      where: {
+        id: request.params.id
+      },
+      select: {
+        title: true,
+        description: true,
+        price: true,
+        location: true,
+        category: true,
+        createdAt: true,
+        userId: true, 
+        photo: true,
+      }
+    })
+  
+    response.status(200).json(product)
+  } catch(e) {
+    response.status(404).json(e)
+  }
 })
 
 router.delete('/product/:id', async(request, response) => {
-  await prisma.product.delete({
-    where: {
-      id: request.params.id
-    }
-  })
+  try {
+    await prisma.product.delete({
+      where: {
+        id: request.params.id
+      }
+    })
 
-  response.json({ msg: "The product Was deleted" })
+    response.status(202).json({ msg: "The product Was deleted" })
+  } catch(e) {
+    response.status(404).json(e)
+  }
+  
 })
 
 router.get('/product/search/:title/:category?', async (request, response) => {
@@ -167,7 +170,7 @@ router.get('/product/search/:title/:category?', async (request, response) => {
     })
   }
 
-  response.json({ products, results: productsCount})
+  response.status(200).json({ products, results: productsCount})
 })
 
 router.get('/product/category/:title', async(request, response) => {
@@ -183,25 +186,29 @@ router.get('/product/category/:title', async(request, response) => {
     },
   })
 
-  response.json({ products, results: productsCount})
+  response.status(200).json({ products, results: productsCount})
 })
 
 router.get('/product/my/:id', async (request, response) => {
-  const products = await prisma.product.findMany({
-    where: {
-      userId: request.params.id
-    }
-  })
-
-  const productsCount = await prisma.product.count({
-    where: {
-      userId: {
-        search: request.params.id
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        userId: request.params.id
+      }
+    })
+  
+    const productsCount = await prisma.product.count({
+      where: {
+        userId: {
+          search: request.params.id
+        },
       },
-    },
-  })
+    })
 
-  response.json({ products, results: productsCount})
+    response.status(200).json({ products, results: productsCount})
+  } catch(e) {
+    response.status(404).json(e)
+  }
 })
 
 export default router
