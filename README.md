@@ -43,6 +43,9 @@ abrir o terminal e rodar os seguintes comandos na pasta do projecto:
 
 ## Fazer requisições
 
+<p>Para fazer uma requisição em uma API, você pode usar ferramentas como o cURL, Postman, Insomnia, entre outras.</p>
+<p>O cURL está disponível em <a href="https://curl.haxx.se/">https://curl.haxx.se/</a>, o Postman em <a href="https://www.postman.com/">https://www.postman.com/</a> e o Insomnia em <a href="https://insomnia.rest/">https://insomnia.rest/</a>.</p>
+
 <div style="overflow-x:auto;">
   <table style="border: 1px solid black;border-collapse: collapse;">
     <thead style="background-color: #000; color: #fff;">
