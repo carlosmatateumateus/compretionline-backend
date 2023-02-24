@@ -131,16 +131,20 @@ router.delete('/product/:id', async(request, response) => {
   
 })
 
-router.get('/product/search/:title/:category?', async (request, response) => {
+router.get('/product/search/:title/:page/:category?/', async (request, response) => {
   let products, productsCount;
+
+  let productsSkip = (20 * Number(request.params.page)) - 20
 
   if (request.params.category) {
     products = await prisma.product.findMany({
+      take: 20,
+      skip: productsSkip,
       where: {
         title: {
           search: request.params.title
         },
-        category: request.params.category
+        category: request.params.category,
       }
     })
 
@@ -154,6 +158,8 @@ router.get('/product/search/:title/:category?', async (request, response) => {
     })
   } else {
     products = await prisma.product.findMany({
+      take: 20,
+      skip: productsSkip,
       where: {
         title: {
           search: request.params.title
@@ -177,13 +183,15 @@ router.get('/product/category/:title', async(request, response) => {
   const products = await prisma.product.findMany({
     where: {
       category: request.params.title
-    }
+    },
+    take: 20,
   })
 
   const productsCount = await prisma.product.count({
     where: {
       category: request.params.title,
     },
+    take: 20,
   })
 
   response.status(200).json({ products, results: productsCount})
@@ -199,9 +207,7 @@ router.get('/product/my/:id', async (request, response) => {
   
     const productsCount = await prisma.product.count({
       where: {
-        userId: {
-          search: request.params.id
-        },
+        userId: request.params.id
       },
     })
 
