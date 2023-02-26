@@ -34,7 +34,7 @@ abrir o terminal e rodar os seguintes comandos na pasta do projecto:
 
 <div style="display: flex;gap:10px;align-items:center;">
   <a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nodejs-colored.svg" width="30" height="30" alt="NodeJS" /></a>
-  <a href="https://expressjs.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" width="30" height="30" alt="Express Js" /></a>
+  <a href="https://expressjs.com/" target="_blank" rel="noreferrer"><img> src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original.svg" width="30" height="30" alt="Express Js" /></a>
   <a href="https://zod.dev/" target="_blank" rel="noreferrer"><img src="https://zod.dev/logo.svg" width="30" height="30" alt="Zod.dev" /></a>
   <a href="https://prisma.io/" target="_blank" rel="noreferrer"><img src="https://www.freelogovectors.net/wp-content/uploads/2022/01/prisma_logo-freelogovectors.net_.png" width="28" height="28" alt="Prisma.io" /></a>
 </div>
